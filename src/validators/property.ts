@@ -1,0 +1,45 @@
+import { z } from 'zod';
+
+export const createPropertySchema = z.object({
+  title_es: z.string().optional(),
+  title_en: z.string().optional(),
+  title_pt: z.string().optional(),
+  description_es: z.string().optional(),
+  description_en: z.string().optional(),
+  description_pt: z.string().optional(),
+  full_description_es: z.string().optional(),
+  full_description_en: z.string().optional(),
+  full_description_pt: z.string().optional(),
+  price: z.string().optional(),
+  hectares: z.number().int().positive().optional(),
+  province: z.string().optional(),
+  zone: z.string().optional(),
+  location: z.string().optional(),
+  activity_es: z.string().optional(),
+  activity_en: z.string().optional(),
+  activity_pt: z.string().optional(),
+  status_es: z.string().optional(),
+  status_en: z.string().optional(),
+  status_pt: z.string().optional(),
+  featured: z.boolean().optional(),
+  visible: z.boolean().optional(),
+  whatsapp_message_es: z.string().optional(),
+  whatsapp_message_en: z.string().optional(),
+  whatsapp_message_pt: z.string().optional(),
+  google_maps_embed: z.string().optional(),
+  characteristics: z.array(z.object({
+    label_es: z.string().optional(),
+    label_en: z.string().optional(),
+    label_pt: z.string().optional(),
+    value: z.string(),
+    position: z.number().int().optional(),
+  })).optional(),
+  features: z.array(z.object({
+    text_es: z.string().optional(),
+    text_en: z.string().optional(),
+    text_pt: z.string().optional(),
+    position: z.number().int().optional(),
+  })).optional(),
+});
+
+export const updatePropertySchema = createPropertySchema;

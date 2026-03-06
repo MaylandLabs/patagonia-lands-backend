@@ -1,0 +1,18 @@
+version: '3.7'
+name: patagonia-lands-backend-production
+services:
+  patagonia-lands-backend:
+    container_name: patagonia-lands-backend
+    build:
+      dockerfile: Dockerfile
+      context: .
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - '6789:6789'
+    networks:
+      - patagonia_network
+
+networks:
+  patagonia_network:

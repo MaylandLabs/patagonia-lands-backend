@@ -1,0 +1,58 @@
+name: Auto deploy patagonia-lands-backend in VPS
+
+on:
+  push:
+    branches:
+      - production
+    paths:
+      - '.github/workflows/**'
+      - 'package.json'
+      - 'src/**'
+      - 'migrations/**'
+      - 'seeds/**'
+      - 'Dockerfile'
+      - 'docker-compose.yml'
+      - 'tsconfig.json'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Deploy using ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.PRODUCTION_SSH_HOST }}
+          username: ${{ secrets.PRODUCTION_SSH_USERNAME }}
+          key: ${{ secrets.PRODUCTION_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /root/repos/patagonia-lands-backend
+            git pull origin production
+            cat <<EOF > .env
+            NODE_ENV=production
+            PORT=6789
+            DB_HOST=${{ secrets.PL_DB_HOST }}
+            DB_PORT=${{ secrets.PL_DB_PORT }}
+            DB_NAME=${{ secrets.PL_DB_NAME }}
+            DB_USER=${{ secrets.PL_DB_USER }}
+            DB_PASSWORD=${{ secrets.PL_DB_PASSWORD }}
+            JWT_SECRET=${{ secrets.PL_JWT_SECRET }}
+            JWT_EXPIRES_IN=7d
+            CORS_ORIGINS=${{ secrets.PL_CORS_ORIGINS }}
+            SMTP_HOST=${{ secrets.NODEMAILER_HOST }}
+            SMTP_PORT=${{ secrets.NODEMAILER_PORT }}
+            SMTP_USER=${{ secrets.PL_SMTP_USER }}
+            SMTP_PASS=${{ secrets.PL_SMTP_PASS }}
+            NOTIFICATION_EMAIL=${{ secrets.PL_NOTIFICATION_EMAIL }}
+            ADMIN_EMAIL=${{ secrets.PL_ADMIN_EMAIL }}
+            ADMIN_PASSWORD=${{ secrets.PL_ADMIN_PASSWORD }}
+            EOF
+            docker-compose build
+            docker-compose down -v
+            docker-compose up -d
