@@ -4,15 +4,6 @@ on:
   push:
     branches:
       - production
-    paths:
-      - '.github/workflows/**'
-      - 'package.json'
-      - 'src/**'
-      - 'migrations/**'
-      - 'seeds/**'
-      - 'Dockerfile'
-      - 'docker-compose.yml'
-      - 'tsconfig.json'
 
 jobs:
   deploy:
