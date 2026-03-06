@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import { Op } from 'sequelize';
+import path from 'path';
+import fs from 'fs';
 import { Property, PropertyImage, PropertyCharacteristic, PropertyFeature } from '../models';
 
 function paramId(req: Request): string {
@@ -305,13 +307,13 @@ export async function toggleFeatured(req: Request, res: Response) {
   }
 }
 
-// Admin: add images
-export async function addImages(req: Request, res: Response) {
+// Admin: upload images
+export async function uploadImages(req: Request, res: Response) {
   try {
     const id = paramId(req);
-    const { images } = req.body as { images: { url: string; position?: number }[] };
+    const files = req.files as Express.Multer.File[];
 
-    if (!images?.length) {
+    if (!files?.length) {
       res.status(400).json({ error: 'No images provided' });
       return;
     }
@@ -322,13 +324,22 @@ export async function addImages(req: Request, res: Response) {
       return;
     }
 
+    const maxPos = await PropertyImage.max<number, PropertyImage>('position', {
+      where: { property_id: id },
+    });
+    let position = (maxPos || 0) + 1;
+
     const created = await PropertyImage.bulkCreate(
-      images.map((img) => ({ property_id: Number(id), url: img.url, position: img.position || 0 }))
+      files.map((file) => ({
+        property_id: Number(id),
+        url: `/uploads/${file.filename}`,
+        position: position++,
+      }))
     );
 
     res.status(201).json({ data: created });
   } catch (err) {
-    console.error('Add images error:', err);
+    console.error('Upload images error:', err);
     res.status(500).json({ error: 'Internal server error' });
   }
 }
@@ -367,11 +378,20 @@ export async function deleteImage(req: Request, res: Response) {
   try {
     const id = paramId(req);
     const imageId = req.params.imageId as string;
-    const deleted = await PropertyImage.destroy({ where: { id: imageId, property_id: id } });
-    if (!deleted) {
+
+    const image = await PropertyImage.findOne({ where: { id: imageId, property_id: id } });
+    if (!image) {
       res.status(404).json({ error: 'Image not found' });
       return;
     }
+
+    // Delete file from disk
+    const filePath = path.join(__dirname, '../..', image.url);
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+
+    await image.destroy();
     res.json({ message: 'Image deleted' });
   } catch (err) {
     console.error('Delete image error:', err);

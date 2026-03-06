@@ -44,7 +44,6 @@ jobs:
             DB_PASSWORD=${{ secrets.PL_DB_PASSWORD }}
             JWT_SECRET=${{ secrets.PL_JWT_SECRET }}
             JWT_EXPIRES_IN=7d
-            CORS_ORIGINS=${{ secrets.PL_CORS_ORIGINS }}
             SMTP_HOST=${{ secrets.NODEMAILER_HOST }}
             SMTP_PORT=${{ secrets.NODEMAILER_PORT }}
             SMTP_USER=${{ secrets.PL_SMTP_USER }}

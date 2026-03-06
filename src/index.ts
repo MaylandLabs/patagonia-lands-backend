@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import path from 'path';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -18,11 +19,13 @@ const PORT = process.env.PORT || 6789;
 app.use(helmet());
 
 // CORS
-const origins = process.env.CORS_ORIGINS?.split(',') || [];
-app.use(cors({ origin: origins, credentials: true }));
+app.use(cors());
 
 // Body parsing
 app.use(express.json({ limit: '10mb' }));
+
+// Serve uploaded images
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // Routes
 app.use('/api/auth', authRoutes);

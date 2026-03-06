@@ -11,6 +11,8 @@ services:
       - .env
     ports:
       - '6789:6789'
+    volumes:
+      - ./uploads:/app/uploads
     networks:
       - patagonia_network
 
