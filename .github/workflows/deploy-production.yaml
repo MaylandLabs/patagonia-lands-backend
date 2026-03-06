@@ -32,6 +32,10 @@ jobs:
           key: ${{ secrets.PRODUCTION_SSH_PRIVATE_KEY }}
           port: 22
           script: |
+            mkdir -p /root/repos
+            if [ ! -d /root/repos/patagonia-lands-backend ]; then
+              git clone git@github.com:MaylandLabs/patagonia-lands-backend.git /root/repos/patagonia-lands-backend
+            fi
             cd /root/repos/patagonia-lands-backend
             git pull origin production
             cat <<EOF > .env
@@ -53,5 +57,8 @@ jobs:
             ADMIN_PASSWORD=${{ secrets.PL_ADMIN_PASSWORD }}
             EOF
             docker-compose build
-            docker-compose down -v
+            docker-compose down
             docker-compose up -d
+            sleep 5
+            docker exec patagonia-lands-backend node dist/db/migrate.js
+            docker exec patagonia-lands-backend node dist/seed.js

@@ -8,7 +8,9 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "migrate": "tsx src/db/migrate.ts",
-    "seed": "tsx seeds/admin.ts"
+    "migrate:prod": "node dist/db/migrate.js",
+    "seed": "tsx src/seed.ts",
+    "seed:prod": "node dist/seed.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
