@@ -3,6 +3,8 @@ import { z } from 'zod';
 export const createPropertySchema = z.object({
   title_es: z.string().optional(),
   title_en: z.string().optional(),
+  description_es: z.string().optional(),
+  description_en: z.string().optional(),
   full_description_es: z.string().optional(),
   full_description_en: z.string().optional(),
   price: z.string().optional(),

@@ -9,6 +9,8 @@ CREATE TABLE properties (
   id SERIAL PRIMARY KEY,
   title_es VARCHAR(500),
   title_en VARCHAR(500),
+  description_es TEXT,
+  description_en TEXT,
   full_description_es TEXT,
   full_description_en TEXT,
   price VARCHAR(100),

@@ -5,6 +5,8 @@ interface PropertyAttributes {
   id?: number;
   title_es?: string;
   title_en?: string;
+  description_es?: string;
+  description_en?: string;
   full_description_es?: string;
   full_description_en?: string;
   price?: string;
@@ -30,6 +32,8 @@ class Property extends Model<PropertyAttributes> implements PropertyAttributes {
   declare id: number;
   declare title_es: string;
   declare title_en: string;
+  declare description_es: string;
+  declare description_en: string;
   declare full_description_es: string;
   declare full_description_en: string;
   declare price: string;
@@ -56,6 +60,8 @@ Property.init(
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     title_es: { type: DataTypes.STRING(500) },
     title_en: { type: DataTypes.STRING(500) },
+    description_es: { type: DataTypes.TEXT },
+    description_en: { type: DataTypes.TEXT },
     full_description_es: { type: DataTypes.TEXT },
     full_description_en: { type: DataTypes.TEXT },
     price: { type: DataTypes.STRING(100) },
