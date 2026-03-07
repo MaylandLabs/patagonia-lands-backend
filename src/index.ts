@@ -18,7 +18,7 @@ const app = express();
 const PORT = process.env.PORT || 6789;
 
 // Security
-app.use(helmet());
+app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 
 // CORS
 app.use(cors());
