@@ -26,7 +26,8 @@ CREATE TABLE properties (
   visible BOOLEAN DEFAULT true,
   whatsapp_message_es TEXT,
   whatsapp_message_en TEXT,
-  google_maps_embed TEXT,
+  lat FLOAT,
+  lon FLOAT,
   created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP DEFAULT NOW()
 );

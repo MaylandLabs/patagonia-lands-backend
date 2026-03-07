@@ -22,7 +22,8 @@ interface PropertyAttributes {
   visible?: boolean;
   whatsapp_message_es?: string;
   whatsapp_message_en?: string;
-  google_maps_embed?: string;
+  lat?: number;
+  lon?: number;
   created_at?: Date;
   updated_at?: Date;
 }
@@ -48,7 +49,8 @@ class Property extends Model<PropertyAttributes> implements PropertyAttributes {
   declare visible: boolean;
   declare whatsapp_message_es: string;
   declare whatsapp_message_en: string;
-  declare google_maps_embed: string;
+  declare lat: number;
+  declare lon: number;
   declare created_at: Date;
   declare updated_at: Date;
 }
@@ -75,7 +77,8 @@ Property.init(
     visible: { type: DataTypes.BOOLEAN, defaultValue: true },
     whatsapp_message_es: { type: DataTypes.TEXT },
     whatsapp_message_en: { type: DataTypes.TEXT },
-    google_maps_embed: { type: DataTypes.TEXT },
+    lat: { type: DataTypes.FLOAT },
+    lon: { type: DataTypes.FLOAT },
     created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
     updated_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
   },

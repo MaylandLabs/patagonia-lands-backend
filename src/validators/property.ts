@@ -20,7 +20,8 @@ export const createPropertySchema = z.object({
   visible: z.boolean().optional(),
   whatsapp_message_es: z.string().optional(),
   whatsapp_message_en: z.string().optional(),
-  google_maps_embed: z.string().optional(),
+  lat: z.number().optional(),
+  lon: z.number().optional(),
   characteristics: z.array(z.object({
     label_es: z.string().optional(),
     label_en: z.string().optional(),

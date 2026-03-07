@@ -146,7 +146,8 @@ router.get('/admin/list', authMiddleware, adminListProperties);
  *               visible: { type: boolean }
  *               whatsapp_message_es: { type: string }
  *               whatsapp_message_en: { type: string }
- *               google_maps_embed: { type: string }
+ *               lat: { type: number }
+ *               lon: { type: number }
  *               characteristics:
  *                 type: array
  *                 items:
