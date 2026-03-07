@@ -12,6 +12,31 @@ const authLimiter = rateLimit({
   message: { error: 'Too many login attempts, please try again later' },
 });
 
+/**
+ * @swagger
+ * /api/auth/login:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Admin login
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [email, password]
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: JWT token and admin info
+ *       401:
+ *         description: Invalid credentials
+ */
 router.post('/login', authLimiter, validate(loginSchema), login);
 
 export default router;

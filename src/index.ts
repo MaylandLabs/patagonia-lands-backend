@@ -6,7 +6,9 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+import swaggerUi from 'swagger-ui-express';
 import sequelize from './db/sequelize';
+import { swaggerSpec } from './swagger';
 import './models';
 import authRoutes from './routes/auth';
 import propertiesRoutes from './routes/properties';
@@ -26,6 +28,9 @@ app.use(express.json({ limit: '10mb' }));
 
 // Serve uploaded images
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+
+// Swagger docs
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Routes
 app.use('/api/auth', authRoutes);
