@@ -6,7 +6,6 @@ interface PropertyCharacteristicAttributes {
   property_id: number;
   label_es?: string;
   label_en?: string;
-  label_pt?: string;
   value: string;
   position?: number;
 }
@@ -16,7 +15,6 @@ class PropertyCharacteristic extends Model<PropertyCharacteristicAttributes> imp
   declare property_id: number;
   declare label_es: string;
   declare label_en: string;
-  declare label_pt: string;
   declare value: string;
   declare position: number;
 }
@@ -27,7 +25,6 @@ PropertyCharacteristic.init(
     property_id: { type: DataTypes.INTEGER, allowNull: false },
     label_es: { type: DataTypes.STRING(255) },
     label_en: { type: DataTypes.STRING(255) },
-    label_pt: { type: DataTypes.STRING(255) },
     value: { type: DataTypes.STRING(500) },
     position: { type: DataTypes.INTEGER, defaultValue: 0 },
   },

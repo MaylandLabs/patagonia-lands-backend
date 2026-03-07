@@ -6,7 +6,6 @@ interface PropertyFeatureAttributes {
   property_id: number;
   text_es?: string;
   text_en?: string;
-  text_pt?: string;
   position?: number;
 }
 
@@ -15,7 +14,6 @@ class PropertyFeature extends Model<PropertyFeatureAttributes> implements Proper
   declare property_id: number;
   declare text_es: string;
   declare text_en: string;
-  declare text_pt: string;
   declare position: number;
 }
 
@@ -25,7 +23,6 @@ PropertyFeature.init(
     property_id: { type: DataTypes.INTEGER, allowNull: false },
     text_es: { type: DataTypes.TEXT },
     text_en: { type: DataTypes.TEXT },
-    text_pt: { type: DataTypes.TEXT },
     position: { type: DataTypes.INTEGER, defaultValue: 0 },
   },
   {

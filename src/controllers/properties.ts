@@ -30,7 +30,6 @@ export async function listProperties(req: Request, res: Response) {
       where[Op.or] = [
         { activity_es: activity },
         { activity_en: activity },
-        { activity_pt: activity },
       ];
     }
     if (min_hectares || max_hectares) {
@@ -43,10 +42,8 @@ export async function listProperties(req: Request, res: Response) {
         [Op.or]: [
           { title_es: { [Op.iLike]: `%${search}%` } },
           { title_en: { [Op.iLike]: `%${search}%` } },
-          { title_pt: { [Op.iLike]: `%${search}%` } },
           { description_es: { [Op.iLike]: `%${search}%` } },
           { description_en: { [Op.iLike]: `%${search}%` } },
-          { description_pt: { [Op.iLike]: `%${search}%` } },
         ],
       };
       Object.assign(where, searchCondition);

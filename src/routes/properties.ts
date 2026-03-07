@@ -129,13 +129,10 @@ router.get('/admin/list', authMiddleware, adminListProperties);
  *             properties:
  *               title_es: { type: string }
  *               title_en: { type: string }
- *               title_pt: { type: string }
  *               description_es: { type: string }
  *               description_en: { type: string }
- *               description_pt: { type: string }
  *               full_description_es: { type: string }
  *               full_description_en: { type: string }
- *               full_description_pt: { type: string }
  *               price: { type: string }
  *               hectares: { type: integer }
  *               province: { type: string }
@@ -143,15 +140,12 @@ router.get('/admin/list', authMiddleware, adminListProperties);
  *               location: { type: string }
  *               activity_es: { type: string }
  *               activity_en: { type: string }
- *               activity_pt: { type: string }
  *               status_es: { type: string }
  *               status_en: { type: string }
- *               status_pt: { type: string }
  *               featured: { type: boolean }
  *               visible: { type: boolean }
  *               whatsapp_message_es: { type: string }
  *               whatsapp_message_en: { type: string }
- *               whatsapp_message_pt: { type: string }
  *               google_maps_embed: { type: string }
  *               characteristics:
  *                 type: array
@@ -160,7 +154,6 @@ router.get('/admin/list', authMiddleware, adminListProperties);
  *                   properties:
  *                     label_es: { type: string }
  *                     label_en: { type: string }
- *                     label_pt: { type: string }
  *                     value: { type: string }
  *                     position: { type: integer }
  *               features:
@@ -170,7 +163,6 @@ router.get('/admin/list', authMiddleware, adminListProperties);
  *                   properties:
  *                     text_es: { type: string }
  *                     text_en: { type: string }
- *                     text_pt: { type: string }
  *                     position: { type: integer }
  *     responses:
  *       201:

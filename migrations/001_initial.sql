@@ -9,13 +9,10 @@ CREATE TABLE properties (
   id SERIAL PRIMARY KEY,
   title_es VARCHAR(500),
   title_en VARCHAR(500),
-  title_pt VARCHAR(500),
   description_es TEXT,
   description_en TEXT,
-  description_pt TEXT,
   full_description_es TEXT,
   full_description_en TEXT,
-  full_description_pt TEXT,
   price VARCHAR(100),
   hectares INTEGER,
   province VARCHAR(255),
@@ -23,15 +20,12 @@ CREATE TABLE properties (
   location VARCHAR(500),
   activity_es VARCHAR(255),
   activity_en VARCHAR(255),
-  activity_pt VARCHAR(255),
   status_es VARCHAR(100),
   status_en VARCHAR(100),
-  status_pt VARCHAR(100),
   featured BOOLEAN DEFAULT false,
   visible BOOLEAN DEFAULT true,
   whatsapp_message_es TEXT,
   whatsapp_message_en TEXT,
-  whatsapp_message_pt TEXT,
   google_maps_embed TEXT,
   created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP DEFAULT NOW()
@@ -50,7 +44,6 @@ CREATE TABLE property_characteristics (
   property_id INTEGER NOT NULL REFERENCES properties(id) ON DELETE CASCADE,
   label_es VARCHAR(255),
   label_en VARCHAR(255),
-  label_pt VARCHAR(255),
   value VARCHAR(500),
   position INTEGER DEFAULT 0
 );
@@ -60,7 +53,6 @@ CREATE TABLE property_features (
   property_id INTEGER NOT NULL REFERENCES properties(id) ON DELETE CASCADE,
   text_es TEXT,
   text_en TEXT,
-  text_pt TEXT,
   position INTEGER DEFAULT 0
 );
 
