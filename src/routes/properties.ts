@@ -129,8 +129,6 @@ router.get('/admin/list', authMiddleware, adminListProperties);
  *             properties:
  *               title_es: { type: string }
  *               title_en: { type: string }
- *               description_es: { type: string }
- *               description_en: { type: string }
  *               full_description_es: { type: string }
  *               full_description_en: { type: string }
  *               price: { type: string }

@@ -42,8 +42,8 @@ export async function listProperties(req: Request, res: Response) {
         [Op.or]: [
           { title_es: { [Op.iLike]: `%${search}%` } },
           { title_en: { [Op.iLike]: `%${search}%` } },
-          { description_es: { [Op.iLike]: `%${search}%` } },
-          { description_en: { [Op.iLike]: `%${search}%` } },
+          { full_description_es: { [Op.iLike]: `%${search}%` } },
+          { full_description_en: { [Op.iLike]: `%${search}%` } },
         ],
       };
       Object.assign(where, searchCondition);
