@@ -43,6 +43,7 @@ jobs:
             SMTP_PORT=${{ secrets.NODEMAILER_PORT }}
             SMTP_USER=${{ secrets.PL_SMTP_USER }}
             SMTP_PASS=${{ secrets.PL_SMTP_PASS }}
+            SMTP_FROM=${{ secrets.PL_SMTP_FROM }}
             NOTIFICATION_EMAIL=${{ secrets.PL_NOTIFICATION_EMAIL }}
             ADMIN_EMAIL=${{ secrets.PL_ADMIN_EMAIL }}
             ADMIN_PASSWORD=${{ secrets.PL_ADMIN_PASSWORD }}
