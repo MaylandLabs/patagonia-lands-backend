@@ -23,7 +23,7 @@ export async function sendPublishRequestNotification(data: {
   if (!to) return;
 
   await transporter.sendMail({
-    from: process.env.SMTP_FROM || process.env.SMTP_USER,
+    from: process.env.SMTP_FROM || 'onboarding@resend.dev',
     to,
     subject: `Nueva solicitud de publicacion - ${data.name}`,
     html: `
