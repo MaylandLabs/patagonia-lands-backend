@@ -142,12 +142,17 @@ export async function getProperty(req: Request, res: Response) {
 // Admin: list all properties
 export async function adminListProperties(req: Request, res: Response) {
   try {
-    const { page = '1', limit = '20' } = req.query;
+    const { page = '1', limit = '20', visible } = req.query;
     const pageNum = Math.max(1, parseInt(page as string) || 1);
     const limitNum = Math.min(100, Math.max(1, parseInt(limit as string) || 20));
     const offset = (pageNum - 1) * limitNum;
 
+    const where: any = {};
+    if (visible === 'true') where.visible = true;
+    else if (visible === 'false') where.visible = false;
+
     const { count: total, rows: data } = await Property.findAndCountAll({
+      where,
       order: [['created_at', 'DESC']],
       limit: limitNum,
       offset,
