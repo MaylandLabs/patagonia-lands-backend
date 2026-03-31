@@ -2,13 +2,22 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import type { StringValue } from 'ms';
+import { Op } from 'sequelize';
 import { Admin } from '../models';
 
 export async function login(req: Request, res: Response) {
   try {
-    const { email, password } = req.body;
+    const { email, username, password } = req.body;
 
-    const admin = await Admin.findOne({ where: { email } });
+    const login = username || email;
+    if (!login) {
+      res.status(401).json({ error: 'Invalid credentials' });
+      return;
+    }
+
+    const admin = await Admin.findOne({
+      where: { [Op.or]: [{ email: login }, { username: login }] },
+    });
     if (!admin) {
       res.status(401).json({ error: 'Invalid credentials' });
       return;
